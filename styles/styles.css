@@ -106,4 +106,37 @@ button {
   background-color: #2E86C1;
 }
 
+.melding {
+  margin-top: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.errorMelding {
+  color: red;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f8d7da;
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+
+.errorMelding.show {
+  display: block;
+}
+
+
 

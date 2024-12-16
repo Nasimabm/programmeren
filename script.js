@@ -4,6 +4,11 @@ console.log("Hello world");
 const genereerKnop = document.querySelector(".genereer"); // Knop om kleurenpalet te genereren
 const colorBoxes = document.querySelectorAll(".color-box"); // De vakjes waarin de kleuren worden weergegeven
 const audioPlayer = document.getElementById("audioPlayer"); // Audio-element voor geluidseffect
+const errorMelding = document.querySelector(".errorMelding"); 
+const audioSrc = "320887__rhodesmas__win-04.wav";
+
+// Stel de audiobron in via JavaScript
+audioPlayer.src = audioSrc;
 
 // Arrays met kleuren
 const kleurenSets = [
@@ -15,7 +20,7 @@ const kleurenSets = [
 
 // Functie: Genereer een willekeurig kleurenpalet
 function genereerpalet() {
-    // Kies een willekeurige set kleuren
+    // Kiest een willekeurige set kleuren
     const gekozenKleuren = kleurenSets[Math.floor(Math.random() * kleurenSets.length)];
 
     // Update de kleuren van de vakken
@@ -25,7 +30,7 @@ function genereerpalet() {
             box.className = "color-box";
 
             // Voeg de nieuwe kleurklasse toe op basis van de kleur
-            const kleurClass = `color-${gekozenKleuren[index].replace("#", "")}`;
+            const kleurClass = `color-${gekozenKleuren[index].replace("#", "")}`; // Maak een CSS-klasse op basis van de gekozen kleur
             box.classList.add(kleurClass); // Nieuwe kleur toepassen via CSS-klasse
         }
     });
@@ -39,7 +44,8 @@ function speelGeluid() {
         audioPlayer.currentTime = 0; // Reset het geluid naar het begin
         audioPlayer.play();         // Speel het geluid af
     } else {
-        console.error("Audio element niet gevonden!"); // Foutmelding als audio-element ontbreekt
+        errorMelding.textContent = "Audio-element niet gevonden!"; // Zet de foutmelding tekst
+        errorMelding.classList.add("show"); // Voeg de 'show' klasse toe om de foutmelding zichtbaar te maken
     }
 }
 
@@ -50,23 +56,24 @@ if (genereerKnop) {
         speelGeluid();   // Geluid afspelen
     });
 } else {
-    console.warn("Genereer-knop niet gevonden!"); // Waarschuwing als de knop ontbreekt
+    errorMelding.textContent = "De genereer-knop is niet gevonden!"; // Foutmelding in de HTML
 }
 
-// Toegangsleeftijd check (voorbeeldfunctie)
-function controleerLeeftijd() {
-    const toegangsleeftijd = 16; // Minimale leeftijd
-    const leeftijd = 16;        // Huidige leeftijd (kan dynamisch worden gemaakt)
+document.querySelector(".controleerKnop").addEventListener("click", function() {
+    const leeftijd = document.querySelector(".leeftijdInput").value; // Haal ingevoerde leeftijd op
+    const melding = document.querySelector(".melding"); // Selecteer de melding
 
-    if (leeftijd >= toegangsleeftijd) {
-        console.log("Welkom"); // Toegang toegestaan
+    if (leeftijd >= 16) {
+        melding.textContent = "Welkom! Je bent oud genoeg.";
     } else {
-        console.log("Helaas, je bent nog niet oud genoeg."); // Toegang geweigerd
+        melding.textContent = "Helaas, je bent nog niet oud genoeg.";
     }
-}
-
-
+});
 
 //bronnen: 
 // Function speelgeluid: Chatgpt
-// audio: https://freesound.org/s/320887/ -->
+// colorBoxes.forEach: Chatgpt
+// audio: https://freesound.org/s/320887/ 
+
+
+
